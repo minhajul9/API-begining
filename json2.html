@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API practice</title>
+</head>
+<body>
+    <h1>JSON</h1>
+    <h2>JavaScript Object Notation</h2>
+
+    <h3>UL of Usernames</h3>
+
+    <ol id="display-user">
+
+    </ol>
+
+    <h3>Emails</h3>
+    <ol id="email-list">
+
+    </ol>
+
+    <script>
+       fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response => response.json())
+        .then(json => displayUser(json))
+
+        function displayUser(users){
+            const userNames = users.map( user => user.username);
+            const ul = document.getElementById('display-user');
+            const ol = document.getElementById('email-list');
+            const emails = users.map(x => x.email);
+
+            for(let i=0; i<userNames.length; i++){
+                const user = userNames[i];
+                const email = emails[i];
+                const li = document.createElement("li");
+                const liEmail = document.createElement("li");
+                li.innerText = user;
+                ul.appendChild(li);
+                liEmail.innerText = email;
+                ol.appendChild(liEmail);
+            }
+        }
+    </script>
+</body>
+</html>
